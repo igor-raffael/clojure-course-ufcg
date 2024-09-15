@@ -1,5 +1,7 @@
 # LISTA 1
 
+## Parte 1
+
 1. Explique o que você entende por s-expressões?
 
 2. Escreva cinco exemplos de s-expressões atômicas. Não use nenhum exemplo dos fornecidos nos slides. Também não use exemplos de colegas. Todos os átomos devem ser de tipos de dados diferentes.
@@ -32,7 +34,7 @@
 
 12. As formas especiais `read` e `read-line` permitem ler dados de entrada. E a função `Integer/parseInt` permite converter uma string em um valor inteiro. Com base nas formas especiais de entrada e saída e nas definições que você mesmo criou anteriormente, crie um pequeno programa no arquivo `eq2.clj` que leia os coeficientes `a`, `b` e `c` de uma equação do segundo grau da entrada e que imprima suas raízes. Se a equação não tiver raízes, imprima a mensagem 'sem raízes' na saída.
 
-# Parte 2
+## Parte 2
 
 Nos exercícios abaixo, crie as funções pedidas e crie uma função `main` de apoio que teste, usando a macro `assert` de Clojure, as funções criadas.
 

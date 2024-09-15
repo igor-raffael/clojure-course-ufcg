@@ -1,0 +1,4 @@
+Em suma, isso significa que as funções são tratados como um tipo de dado primitivo na memória,
+o que faz com funções possam ser tratadas como argumento, retornadas por outras funções e/ou
+armazenadas em estruturas de dados. Tal flexibilidade permite fazer currying e composição de
+funções, o que, por sua vez, promove a modularidade, legibilidade e reutilização do código.

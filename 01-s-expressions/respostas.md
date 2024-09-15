@@ -5,6 +5,7 @@ s-expressões, que são a unidade fundamental de representação e memória.
 Por definição, uma s-expressão pode ser de duas formas:
 1. Átomo;
 2. Cons cell.
+
 Um átomo é um símbolo que representa um dado primitivo. Ele é considerado "atômico"
 porque não contém s-expressões recursivamente.
 Uma cons cell é a unidade fundamental de composição. Ela consistente num par ordenado
