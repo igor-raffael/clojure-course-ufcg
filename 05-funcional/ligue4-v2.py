@@ -13,10 +13,23 @@ def switch_turn(current_turn):
     return 2 if current_turn == 1 else 1
 
 
-grid = create_grid()
-scores = create_scores()
-current_turn = 1
-game_active = True
+def print_game(grid):
+    print("|1|2|3|4|5|6|7|")
+    for row in grid:
+        print(
+            "|"
+            + "|".join(" " if cell == 0 else "x" if cell == 1 else "o" for cell in row)
+            + "|"
+        )
+    print()
+
+
+def print_scores(scores):
+    print("\n----- Scoreboard -----")
+    print(f"Player 1 (x): {scores['player1']}")
+    print(f"Player 2 (o): {scores['player2']}")
+    print(f"Ties: {scores['ties']}")
+    print("----------------------\n")
 
 
 def update_score(scores, winner):
@@ -28,6 +41,37 @@ def update_score(scores, winner):
     else:
         new_scores["ties"] += 1
     return new_scores
+
+
+def process_input(grid, current_turn, scores):
+    game_active = True
+    user_input = input("Which column? ")
+
+    if user_input == "d":
+        scores = desistance(current_turn, scores)
+        return grid, switch_turn(current_turn), scores, False
+    elif user_input.isdigit() and 1 <= int(user_input) <= 7:
+        grid, current_turn = play_input(user_input, grid, current_turn)
+        scores, current_turn, game_active = check_win(
+            grid, scores, current_turn, game_active
+        )
+    else:
+        print("\nInvalid input! Try again.")
+        return grid, current_turn, scores, True
+
+    return grid, current_turn, scores, game_active
+
+
+def restart_prompt():
+    restart_choice = input("Do you wanna play another round? [y/n]")
+    return restart_choice.lower() == "y"
+
+
+def end_game(current_turn):
+    if current_turn == 0:
+        print("It's a tie!")
+    else:
+        print(f"Player {current_turn} wins!")
 
 
 def desistance(current_turn, scores):
@@ -54,42 +98,6 @@ def play_input(user_input, grid, current_turn):
     else:
         print("\nInvalid column! Choose between 1 and 7.\n")
     return grid, current_turn
-
-
-def process_input(grid, current_turn, scores):
-    game_active = True
-    user_input = input("Which column? ")
-
-    if user_input == "d":
-        scores = desistance(current_turn, scores)
-        return grid, switch_turn(current_turn), scores, False
-    elif user_input.isdigit() and 1 <= int(user_input) <= 7:
-        grid, current_turn = play_input(user_input, grid, current_turn)
-        scores, current_turn, game_active = check_win(
-            grid, scores, current_turn, game_active
-        )
-    else:
-        print("\nInvalid input! Try again.")
-        return grid, current_turn, scores, True
-
-    return grid, current_turn, scores, game_active
-
-
-def print_game(grid):
-    for row in grid:
-        print(
-            "|"
-            + "|".join(" " if cell == 0 else "x" if cell == 1 else "o" for cell in row)
-            + "|"
-        )
-    print()
-
-
-def end_game(current_turn):
-    if current_turn == 0:
-        print("It's a tie!")
-    else:
-        print(f"Player {current_turn} wins!")
 
 
 def check_win(grid, scores, current_turn, game_active):
@@ -147,19 +155,6 @@ def check_win(grid, scores, current_turn, game_active):
         game_active = False
 
     return scores, current_turn, game_active
-
-
-def print_scores(scores):
-    print("\n----- Scoreboard -----")
-    print(f"Player 1 (x): {scores['player1']}")
-    print(f"Player 2 (o): {scores['player2']}")
-    print(f"Ties: {scores['ties']}")
-    print("----------------------\n")
-
-
-def restart_prompt():
-    restart_choice = input("Do you wanna play another round? [y/n]")
-    return restart_choice.lower() == "y"
 
 
 def run_game():
